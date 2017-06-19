@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         arbitrage helper
+// @name         arbitrage-helper
 // @version      0.0.2
 // @description  arbitrage helper of sosobtc.com
 // @match        *://www.sosobtc.com/
