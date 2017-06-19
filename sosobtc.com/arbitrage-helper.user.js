@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         sosobtc
+// @name         arbitrage helper
 // @version      0.0.2
-// @description  arbitrage helper for sosobtc.com
+// @description  arbitrage helper of sosobtc.com
 // @match        *://www.sosobtc.com/
 // @run-at       document-end
 // @grant        GM_addStyle
