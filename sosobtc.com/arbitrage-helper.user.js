@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         sosobtc
 // @version      0.0.1
-// @description  arbitrage helper
-// @match        *://www.sosobtc.com/
+// @description  arbitrage helper for sosobtc.com
+// @include			 *://www.sosobtc.com
 // @run-at       document-end
 // @grant        GM_addStyle
 // @icon         https://www.sosobtc.com/favicon.ico
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
-// @namespace    http://userscripts.henryfour.com
+// @namespace    userscripts.henryfour.com
 // @homepageURL  https://github.com/henryfour/userscripts
 // @supportURL   https://github.com/henryfour/userscripts/issues
 // @author       HenryFour
-// @copyright    2017+, HenryFour
+// @copyright    2017, HenryFour
 // ==/UserScript==
 
 // GM_addStyle("body { background-color: black; }");
