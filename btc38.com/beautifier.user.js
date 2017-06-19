@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name         btc38-highlight
+// @name         btc38-beautifier
 // @version      0.0.1
-// @description  突出显示比特时代(btc38)部分页面中的关键信息
+// @description  突出显示比特时代(btc38)部分页面中的关键信息. 注意默认会隐藏行情(交易)界面的蜡烛图.
 // @match        *://*.btc38.com/*
 // @run-at       document-end
 // @grant        GM_addStyle
-// @icon         https://yunbi.com/favicon.ico
+// @icon         http://www.btc38.com/statics/images/coin_logos/BTC_logo.png
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // @namespace    userscripts.henryfour.com
 // @homepageURL  https://github.com/henryfour/userscripts
