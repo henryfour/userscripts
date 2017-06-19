@@ -1,1 +1,1 @@
-# userscripts
+userscripts============================================userscripts for tampermonkey### references* [tampermonkey]( http://tampermonkey.net/ )* [tampermonkey docs]( http://tampermonkey.net/documentation.php?ext=dhdg )* [openuserjs]( https://openuserjs.org/ )* [userscripts-mirror]( http://userscripts-mirror.org/ )
