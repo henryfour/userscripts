@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         arbitrage-helper
 // @version      0.0.2
-// @description  arbitrage helper of sosobtc.com
+// @description  简化并优化 sosobtc.com 的显示效果以提供(搬砖)套利比价参考. 要求买一价和卖一价必须在4, 5两列. 目前只对自选产品有效.
 // @match        *://www.sosobtc.com/
 // @run-at       document-end
 // @grant        GM_addStyle
