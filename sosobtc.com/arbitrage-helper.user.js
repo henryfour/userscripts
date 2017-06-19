@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         sosobtc
-// @version      0.0.1
+// @version      0.0.2
 // @description  arbitrage helper for sosobtc.com
 // @match        *://www.sosobtc.com/
 // @run-at       document-end
