@@ -2,7 +2,7 @@
 // @name         sosobtc
 // @version      0.0.1
 // @description  arbitrage helper for sosobtc.com
-// @include			 *://www.sosobtc.com
+// @match        *://www.sosobtc.com/
 // @run-at       document-end
 // @grant        GM_addStyle
 // @icon         https://www.sosobtc.com/favicon.ico
