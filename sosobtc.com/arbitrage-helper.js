@@ -127,8 +127,6 @@ GM_addStyle(
     });
 })();
 
-// 自动显示更多
-// 目前的这个实现有问题, click 没有起效, 是因为页面是 react 渲染的缘故吗?
 (function afterLoad(){
     var marketMore = $(".market_more");
 })();
