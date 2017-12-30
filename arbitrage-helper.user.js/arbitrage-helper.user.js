@@ -2,17 +2,20 @@
 // @name         arbitrage-helper
 // @version      0.0.3
 // @description  arbitrage helper for sosobtc/aicoin
+// @description  简化并优化 sosobtc/aicoin 的显示效果以提供(搬砖)套利比价参考.
+// @description  要求买一价和卖一价必须在6, 7两列. 目前只对自选产品有效.
+// @namespace    userscripts.henryfour.com
+// @homepageURL  https://github.com/henryfour/userscripts
+// @supportURL   https://github.com/henryfour/userscripts/issues
+// @author       HenryFour
+// @copyright    2017+, HenryFour
+//
 // @run-at       document-end
 // @grant        GM_addStyle
 // @include      https://*.sosobtc.com/*
 // @include      *://*.aicoin.net.cn/*
 // @icon         https://www.aicoin.net.cn/favicon.ico
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
-// @namespace    userscripts.henryfour.com
-// @homepageURL  https://github.com/henryfour/userscripts
-// @supportURL   https://github.com/henryfour/userscripts/issues
-// @author       HenryFour
-// @copyright    2017, HenryFour
 // ==/UserScript==
 
 // 设定列的位置, 买一价, 卖一价, 涨幅
