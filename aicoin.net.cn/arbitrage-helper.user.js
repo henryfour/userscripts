@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         arbitrage-helper
-// @version      0.0.2
-// @description  简化并优化 sosobtc.com 的显示效果以提供(搬砖)套利比价参考. 要求买一价和卖一价必须在4, 5两列. 目前只对自选产品有效.
-// @match        *://www.sosobtc.com/
+// @version      0.0.3
+// @description  arbitrage helper for sosobtc/aicoin
 // @run-at       document-end
 // @grant        GM_addStyle
+// @include      https://*.sosobtc.com/*
+// @include      *://*.aicoin.net.cn/*
 // @icon         https://www.sosobtc.com/favicon.ico
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // @namespace    userscripts.henryfour.com
@@ -14,6 +15,9 @@
 // @copyright    2017, HenryFour
 // ==/UserScript==
 
+// 设定列的位置, 买一价, 卖一价, 涨幅
+var posBuy = 6, posSell = 7, posChange = 3;
+
 // GM_addStyle("body { background-color: black; }");
 // 买一价, 卖一价, 涨幅等突出显示
 GM_addStyle(
@@ -21,10 +25,10 @@ GM_addStyle(
     // 设置币种和交易平台(交易商)名字颜色
     "#market_tabs .tab-content table tr td.market_name span { color:blue; }" +
     "#market_tabs .tab-content table tr td.market_name span.name { color:black; }" +
-    // 设置 买入, 卖出, 涨幅的背景色, 注意位置是固定死的
-    "#market_tabs .tab-content table td:nth-child(4) { background-color: #009688;font-weight:bold; }" +
-    "#market_tabs .tab-content table td:nth-child(5) { background-color: #CC6600;font-weight:bold; }" +
-    "#market_tabs .tab-content table td:nth-child(6) { background-color: #B0E0E6;font-weight:bold; }" +
+    // 设置 买入, 卖出, 涨幅背景色
+    "#market_tabs .tab-content table td:nth-child(" + posBuy + ") { background-color: #009688;font-weight:bold; }" +
+    "#market_tabs .tab-content table td:nth-child("+ posSell +") { background-color: #CC6600;font-weight:bold; }" +
+    "#market_tabs .tab-content table td:nth-child("+ posChange +") { background-color: #B0E0E6;font-weight:bold; }" +
     // 设置行 hover 的背景色
     "#market_tabs .tab-content table tr:hover { background-color:grey; }" +
     ""
@@ -46,21 +50,22 @@ GM_addStyle(
     $("._3GrMQ7i3tFoJgOqEacuMyt").hide();
     $("._9mJU0WMvJKiO0r8w5UoBV").hide();
     // 添加价格显示区域
-    $("._3QGExTshWJ53K_WZIr05vm").append("<div><p class=price1 style='color:black;font-weight:bold;line-height:20px;margin:10px 0 0 0'></p><p class=price2 style='color:black;font-weight:bold;line-height:20px;margin:5px 0 0 0'></p></div>");
+    $("._3QGExTshWJ53K_WZIr05vm").append("<div><p class=price1 style='color:white;font-weight:bold;line-height:20px;margin:10px 0 0 0'></p>" +
+                                         "<p class=price2 style='color:white;font-weight:bold;line-height:20px;margin:5px 0 0 0'></p></div>");
     var $price1 = $("._3QGExTshWJ53K_WZIr05vm").find("div .price1");
     var $price2 = $("._3QGExTshWJ53K_WZIr05vm").find("div .price2");
     $price1.text("提示信息区1: ....");
     $price2.text("提示信息区2: ....");
 
     // 背景色设置
-    var colorBuy="#009688", colorSell="#CC6600", colorFocus="red", rowFocus="lightyellow";
+    var colorBuy="#009688", colorSell="#CC6600", colorFocus="red", rowFocus="lightgray";
     var compareTwoPrice = function($x1, $x2) {
         // 计算价格的比率
         var pBuy = $x1.cell.find(".main").text(), pSell = $x2.cell.find(".main").text();
         var rate = (((pSell-pBuy)/pBuy) * 100).toFixed(2);
         // 获取币种信息
-        var name = $x1.cell.parent().find(".market_name .name").parent().text();
-        name = name.substring(0, name.indexOf("("));
+        var name = $x1.cell.parent().find(".market_name .name").parent().clone().children().remove().end().text();
+        name = name.substring(name.indexOf("-")+1);
         return name + ": " + pBuy + " -> " + pSell + "   获利比   " + rate + "%";
     };
     // 点击买卖价格时显示颜色并计算差价
@@ -104,8 +109,8 @@ GM_addStyle(
         $x.parent().css("background-color", rowFocus);
         refreshPricePairs();
     };
-    var $buy1s = $("#market_tabs .tab-content table td:nth-child(4)");
-    var $sell1s = $("#market_tabs .tab-content table td:nth-child(5)");
+    var $buy1s = $("#market_tabs .tab-content table td:nth-child("+posBuy+")");
+    var $sell1s = $("#market_tabs .tab-content table td:nth-child("+posSell+")");
     // 禁用各行的链接
     $buy1s.parent().off("click");
     $sell1s.parent().off("click");
@@ -117,11 +122,11 @@ GM_addStyle(
     $("#market_tabs .tab-content table").on("click", "td:not(.opts)", function(e) {
         e.stopPropagation();
     });
-    $("#market_tabs .tab-content table").on("click", "td:nth-child(4)", function(e) {
+    $("#market_tabs .tab-content table").on("click", "td:nth-child("+posBuy+")", function(e) {
         onClickPrice("buy", $(this));
         e.stopPropagation();
     });
-    $("#market_tabs .tab-content table").on("click", "td:nth-child(5)", function(e) {
+    $("#market_tabs .tab-content table").on("click", "td:nth-child("+posSell+")", function(e) {
         onClickPrice("sell", $(this));
         e.stopPropagation();
     });
