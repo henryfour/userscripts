@@ -6,7 +6,7 @@
 // @grant        GM_addStyle
 // @include      https://*.sosobtc.com/*
 // @include      *://*.aicoin.net.cn/*
-// @icon         https://www.sosobtc.com/favicon.ico
+// @icon         https://www.aicoin.net.cn/favicon.ico
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // @namespace    userscripts.henryfour.com
 // @homepageURL  https://github.com/henryfour/userscripts
