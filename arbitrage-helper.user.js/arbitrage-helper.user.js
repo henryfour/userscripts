@@ -9,6 +9,7 @@
 // @supportURL   https://github.com/henryfour/userscripts/issues
 // @author       HenryFour
 // @copyright    2017+, HenryFour
+// @license			 MIT
 //
 // @run-at       document-end
 // @grant        GM_addStyle
