@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         prettier-page
+// @name         page-prettier
 // @version      0.0.1
 // @description  为将页面打印为 pdf 而隐藏页面部分内容
 // @namespace    userscripts.henryfour.com
@@ -13,6 +13,7 @@
 // @grant        GM_addStyle
 // @match        https://*.ethfans.org/posts/*
 // @match        https://*.jianshu.com/p/*
+// @match        https://*.okexsupport.zendesk.com/*
 // @icon         https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // ==/UserScript==
@@ -33,13 +34,25 @@ var confs = [
     domain: "jianshu.com",
     printHides: [
       "#__next header", "#__next aside", "#__next aside + div", "#__next footer",
-      "#__next #note-page-comment", "#__next #note-page-comment + section", 
+      "#__next #note-page-comment", "#__next #note-page-comment + section",
     ],
     hides: [
       "#__next footer + div", // 赞, 赏
     ],
     customs: [
       "#__next div[role=main] > div:first-child {width: 100%}",
+    ],
+  },
+  {
+    domain: "okexsupport.zendesk.com",
+    printHides: [
+      "header.header", "nav.sub-nav", "main .container-divider",
+      "#article-container .article-sidebar", "#article-container footer", "#article-container .article-relatives", "#article-container .article-return-to-top",
+      "footer.footer"
+    ],
+    hides: [
+    ],
+    customs: [
     ],
   },
 ];
@@ -63,6 +76,7 @@ function doPrettier(index) {
   for (var i = 0; i < confs.length; i++) {
     // console.log(selectors.join(","));
     if (url.indexOf(confs[i].domain) > 0) {
+      console.log("doPrettier", i)
       doPrettier(i);
       break;
     }
