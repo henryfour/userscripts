@@ -14,21 +14,34 @@
 // @match        https://*.ethfans.org/posts/*
 // @match        https://*.jianshu.com/p/*
 // @match        https://*.okexsupport.zendesk.com/*
+// @match        https://*.okex.com/*
+// @match        https://baike.baidu.com/*
 // @icon         https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // ==/UserScript==
 
 var confs = [
   {
+    domain: "baike.baidu.com",
+    printHides: [
+      ".header-wrapper", ".navbar-wrapper", ".before-content", ".lemmaWgt-searchHeader", ".wgt-footer-main",
+      "#side-share", ".side-content", ".personal-content", ".top-tool", 
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [
+      ".body-wrapper .content-wrapper .content .main-content {width: auto}",
+    ],
+  },
+  {
     domain: "ethfans.org",
     printHides: [
       ".navbar-wrapper", "p.meta.tags", ".mask",
       ".content-footer", ".topic-reply-container", "footer.footer"
     ],
-    hides: [
-    ],
-    customs: [
-    ],
+    hides: [],
+    normalCss: [],
+    printCss: [],
   },
   {
     domain: "jianshu.com",
@@ -39,9 +52,10 @@ var confs = [
     hides: [
       "#__next footer + div", // 赞, 赏
     ],
-    customs: [
+    normalCss: [
       "#__next div[role=main] > div:first-child {width: 100%}",
     ],
+    printCss: [],
   },
   {
     domain: "okexsupport.zendesk.com",
@@ -50,18 +64,31 @@ var confs = [
       "#article-container .article-sidebar", "#article-container footer", "#article-container .article-relatives", "#article-container .article-return-to-top",
       "footer.footer"
     ],
-    hides: [
+    hides: [],
+    normalCss: [],
+    printCss: [],
+  },
+  {
+    domain: "okex.com",
+    printHides: [
+      "#headerContainer", "#footerContainer", "#YSF-BTN-HOLDER"
     ],
-    customs: [
-    ],
+    hides: [],
+    normalCss: [],
+    printCss: [],
   },
 ];
 
 function doPrettier(index) {
   var conf = confs[index];
-  // custom css
-  for (var i = 0; i < conf.customs.length; i++) {
-    GM_addStyle(conf.customs[i]);
+  var i;
+  // custom normal css
+  for (i = 0; i < conf.normalCss.length; i++) {
+    GM_addStyle(conf.normalCss[i]);
+  }
+  // custom css for print media
+  for (i = 0; i < conf.printCss.length; i++) {
+    GM_addStyle('@media print { ' + conf.printCss[i] + ' }');
   }
   GM_addStyle(conf.hides.join(",") + ' { display: none; } }');
   // hide elements
@@ -76,7 +103,7 @@ function doPrettier(index) {
   for (var i = 0; i < confs.length; i++) {
     // console.log(selectors.join(","));
     if (url.indexOf(confs[i].domain) > 0) {
-      console.log("doPrettier", i)
+      console.log("doPrettier", i);
       doPrettier(i);
       break;
     }
