@@ -73,32 +73,75 @@ function convertRowToURI(row) {
   return "ss://" + btoa(method+":"+password+"@"+hostname+":"+port) + "#" + tag;
 }
 
+// 将一行 ss 转换成 ssr config 格式, 参考 https://github.com/qinyuhang/ShadowsocksX-NG-R
+function convertRowToConfig(row) {
+  // uri = "ss://" + base64(method:password@hostname:port) + "#tag"
+  var tds = row.find('td');
+  var hostname=tds[1].innerText;
+  var port=tds[2].innerText;
+  var method=tds[3].innerText;
+  var password=tds[4].innerText;
+  var area=tds[6].innerText;
+  var tag = area;
+  return {
+    enable: true,
+    password: password,
+    method: method,
+    remarks: tag,
+    server: hostname,
+    obfs: "plain",
+    protocol: "origin",
+    // 比如转换为整数, 否则 ssr 可能会导入出错
+    server_port: parseInt(port),
+    remarks_base64: btoa(tag)
+  };
+}
+
 // export all rows to URIs to clipboard
-function exportAllRows() {
+function exportAllRows(fmtList) {
   if (!checkLoading()) {
     return;
   }
-  var uris = [];
+  var list = [];
   for (var i = 0; i < state.rows.length; i++) {
-    var uri = convertRowToURI($(state.rows[i]));
-    uris.push(uri);
+    var item;
+    if (fmtList) {
+      item = convertRowToURI($(state.rows[i]));
+    } else {
+      item = convertRowToConfig($(state.rows[i]));
+    }
+    list.push(item);
   }
-  console.log(uris);
-  // alert(uris);
-  return uris;
+  // alert(list);
+  if (fmtList) {
+    return list;
+  }
+  // 比如符合格式, 否则 ssr 会导入出错
+  return {
+    "configs": list
+  };
 }
 
 function init() {
   // title - 免费S账号
   var title = $('div.main > h3').eq(1);
   // insert export button
-  title.append('<button id="export" style="padding:8px; margin:2px 8px; color:red;">点击导出所有服务器</button>');
-  $('<textarea id="uris" rows="4" style="width:100%;"></textarea>').insertAfter(title);
-  $('#export').click(function() {
-    console.log("ok");
-    var uris = exportAllRows();
-    // copy uris to textarea
-    $('#uris').text(uris.join("\n"));
+  title.append('<button id="export-list" style="padding:8px; margin:2px 8px; color:red;">导出为列表</button>');
+  title.append('<button id="export-json" style="padding:8px; margin:2px 8px; color:red;">导出为Json</button>');
+  $('<textarea id="exported" rows="4" style="width:100%;"></textarea>').insertAfter(title);
+  $('#export-list').click(function() {
+    var list = exportAllRows(true);
+    if (list) {
+      // copy to textarea
+      $('#exported').text(list.join("\n"));
+    }
+  });
+  $('#export-json').click(function() {
+    var json = exportAllRows(false);
+    if (json) {
+      // copy to textarea
+      $('#exported').text(JSON.stringify(json));
+    }
   });
 }
 
