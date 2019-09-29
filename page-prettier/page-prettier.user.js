@@ -16,11 +16,24 @@
 // @match        https://*.okexsupport.zendesk.com/*
 // @match        https://*.okex.com/*
 // @match        https://baike.baidu.com/*
+// @match        https://www.tokengazer.com/*
 // @icon         https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "tokengazer.com",
+    printHides: [
+      "#app .head", "#app .footer", "#app .reportLeft .static"
+    ],
+    hides: [],
+    normalCss: [
+    ],
+    printCss: [
+      "#app .center {padding:0;}",
+    ],
+  },
   {
     domain: "baike.baidu.com",
     printHides: [
