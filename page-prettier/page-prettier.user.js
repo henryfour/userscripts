@@ -13,7 +13,7 @@
 // @grant        GM_addStyle
 // @match        https://*.ethfans.org/posts/*
 // @match        https://*.jianshu.com/p/*
-// @match        https://*.okexsupport.zendesk.com/*
+// @match        https://*.zendesk.com/*
 // @match        https://*.okex.com/*
 // @match        https://baike.baidu.com/*
 // @match        https://www.tokengazer.com/*
@@ -71,10 +71,12 @@ var confs = [
     printCss: [],
   },
   {
-    domain: "okexsupport.zendesk.com",
+    domain: "zendesk.com",
     printHides: [
       "header.header", "nav.sub-nav", "main .container-divider",
-      "#article-container .article-sidebar", "#article-container footer", "#article-container .article-relatives", "#article-container .article-return-to-top",
+      "#article-container .article-sidebar",
+       "#article-container .article-relatives", "#article-container .article-return-to-top", "#article-container footer",
+      ".article-comments", ".article-subscribe",
       "footer.footer"
     ],
     hides: [],
