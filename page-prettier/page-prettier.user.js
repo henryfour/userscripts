@@ -11,6 +11,7 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @match        https://*.juejin.im/post/*
 // @match        https://*.ethfans.org/posts/*
 // @match        https://*.jianshu.com/p/*
 // @match        https://*.zendesk.com/*
@@ -22,6 +23,18 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "juejin.im",
+    printHides: [
+      ".main-header-box", ".sidebar", ".article-suspended-panel", ".recommended-area", ".suspension-panel", 
+      ".main-area .article-banner", ".main-area #comment-box",
+    ],
+    hides: [],
+    normalCss: [
+    ],
+    printCss: [
+    ],
+  },
   {
     domain: "tokengazer.com",
     printHides: [
