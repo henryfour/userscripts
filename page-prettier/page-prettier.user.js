@@ -11,6 +11,7 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @match        https://*.github.com/*
 // @match        https://*.juejin.im/post/*
 // @match        https://*.ethfans.org/posts/*
 // @match        https://*.jianshu.com/p/*
@@ -23,6 +24,20 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "github.com",
+    printHides: [
+      "#discussion_bucket > .col-3", // issuse 右侧
+      ".pagehead",
+      // 存在问题, 先不处理: "#blob-path", ".branch-select-menu", ".BtnGroup", ".Box-header", ".repository-content > div.flex-items-start",
+    ],
+    hides: [],
+    normalCss: [
+    ],
+    printCss: [
+      "#discussion_bucket > .col-9 {width: 100%;}", // issuse
+    ],
+  },
   {
     domain: "juejin.im",
     printHides: [
@@ -122,6 +137,9 @@ function doPrettier(index) {
   // hide elements
   GM_addStyle(conf.hides.join(",") + ' { display: none; } }');
   // hide when print
+  // for (i = 0; i < conf.printCss.length; i++) {
+  //   GM_addStyle('@media print { ' + conf.printHides[i]  + ' { display: none; } }');
+  // }
   GM_addStyle('@media print { ' + conf.printHides.join(",") + ' { display: none; } }');
 }
 
