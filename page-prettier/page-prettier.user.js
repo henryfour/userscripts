@@ -11,6 +11,7 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @match        https://opensea.io/*
 // @match        https://*.github.com/*
 // @match        https://*.juejin.im/post/*
 // @match        https://*.ethfans.org/posts/*
@@ -24,6 +25,19 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "opensea.io",
+    printHides: [
+      ".App > div:first-child", ".App nav",
+      ".Discord", ".Footer2",
+    ],
+    hides: [],
+    normalCss: [
+    ],
+    printCss: [
+      "#discussion_bucket > .col-9 {width: 100%;}", // issuse
+    ],
+  },
   {
     domain: "github.com",
     printHides: [
