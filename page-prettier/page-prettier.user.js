@@ -11,7 +11,8 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
-// @match        https://opensea.io/*
+// @match        https://*.zhihu.com/*
+// @match        https://*.opensea.io/*
 // @match        https://*.github.com/*
 // @match        https://*.juejin.im/post/*
 // @match        https://*.ethfans.org/posts/*
@@ -26,17 +27,28 @@
 
 var confs = [
   {
+    domain: "zhihu.com",
+    printHides: [
+      // 专栏
+      ".ColumnPageHeader-Wrapper", ".RichContent-actions", ".CornerButtons", ".Recommendations-Main", ".Comments-container", ".Post-Sub", 
+      // 问答, question
+      "header", ".Question-sideColumn"
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [
+      ".Question-mainColumn {width: auto}",
+    ],
+  },
+  {
     domain: "opensea.io",
     printHides: [
       ".App > div:first-child", ".App nav",
       ".Discord", ".Footer2",
     ],
     hides: [],
-    normalCss: [
-    ],
-    printCss: [
-      "#discussion_bucket > .col-9 {width: 100%;}", // issuse
-    ],
+    normalCss: [],
+    printCss: [],
   },
   {
     domain: "github.com",
