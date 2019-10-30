@@ -11,6 +11,7 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @match        https://*.learnblockchain.cn/*
 // @match        https://*.zhihu.com/*
 // @match        https://*.opensea.io/*
 // @match        https://*.github.com/*
@@ -26,6 +27,19 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "learnblockchain.cn",
+    printHides: [
+      "#sub-menu", 
+      "#wechat_subscriber", "#comments", "footer.post-footer", "#footer",
+      ".back-to-top",
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [
+      "#posts {padding-top: 0}",
+    ],
+  },
   {
     domain: "zhihu.com",
     printHides: [
@@ -166,7 +180,7 @@ function doPrettier(index) {
   // for (i = 0; i < conf.printCss.length; i++) {
   //   GM_addStyle('@media print { ' + conf.printHides[i]  + ' { display: none; } }');
   // }
-  GM_addStyle('@media print { ' + conf.printHides.join(",") + ' { display: none; } }');
+  GM_addStyle('@media print { ' + conf.printHides.join(",") + ' { display: none !important; } }');
 }
 
 (function() {
