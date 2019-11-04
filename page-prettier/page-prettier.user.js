@@ -8,8 +8,8 @@
 // @supportURL   https://github.com/henryfour/userscripts/issues
 // @author       HenryFour
 // @copyright    2019+, HenryFour
-// @license	     MIT
-// @icon         https://github.com/henryfour/userscripts/blob/master/page-prettier/icon.png
+// @license      MIT
+// @icon         https://github.com/henryfour/userscripts/raw/master/page-prettier/icon.png
 //
 // @run-at       document-end
 // @grant        GM_addStyle
