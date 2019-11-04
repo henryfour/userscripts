@@ -1,16 +1,20 @@
 // ==UserScript==
 // @name         page-prettier
 // @version      0.0.1
-// @description  为将页面打印为 pdf 而隐藏页面部分内容
+// @description  通过修改 css 来自定义特定网页, 用于改善页面显示效果或者优化打印为 pdf 文件时的效果.
+//
 // @namespace    userscripts.henryfour.com
 // @homepageURL  https://github.com/henryfour/userscripts
 // @supportURL   https://github.com/henryfour/userscripts/issues
 // @author       HenryFour
 // @copyright    2019+, HenryFour
 // @license	     MIT
+// @icon         https://github.com/henryfour/userscripts/blob/master/page-prettier/icon.png
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
+//
 // @match        https://*.chainnews.com/*
 // @match        https://*.learnblockchain.cn/*
 // @match        https://*.zhihu.com/*
@@ -23,8 +27,6 @@
 // @match        https://*.okex.com/*
 // @match        https://baike.baidu.com/*
 // @match        https://www.tokengazer.com/*
-// @icon         https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-// @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // ==/UserScript==
 
 var confs = [
