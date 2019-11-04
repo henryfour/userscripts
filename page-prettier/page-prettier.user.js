@@ -11,6 +11,7 @@
 //
 // @run-at       document-end
 // @grant        GM_addStyle
+// @match        https://*.chainnews.com/*
 // @match        https://*.learnblockchain.cn/*
 // @match        https://*.zhihu.com/*
 // @match        https://*.opensea.io/*
@@ -28,17 +29,15 @@
 
 var confs = [
   {
-    domain: "learnblockchain.cn",
+    domain: "chainnews.com",
     printHides: [
-      "#sub-menu", 
-      "#wechat_subscriber", "#comments", "footer.post-footer", "#footer",
-      ".back-to-top",
+      ".section-subnav", ".section-header", ".section-navbar",
+      ".aside-container", "footer.section-footer", ".post-sidebar", 
+      ".section-tips", ".post-share-bottom", ".article-sponsors", ".post-related", 
     ],
     hides: [],
     normalCss: [],
-    printCss: [
-      "#posts {padding-top: 0}",
-    ],
+    printCss: [],
   },
   {
     domain: "zhihu.com",
