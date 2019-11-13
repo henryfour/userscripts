@@ -15,6 +15,7 @@
 // @grant        GM_addStyle
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 //
+// @match        https://*vitalik.ca/*
 // @match        https://*.8btc.com/article/*
 // @match        https://*.chainnews.com/*
 // @match        https://*.learnblockchain.cn/*
@@ -31,6 +32,15 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "vitalik.ca",
+    printHides: [
+      "#disqus_thread",
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [],
+  },
   {
     domain: "8btc.com",
     printHides: [
