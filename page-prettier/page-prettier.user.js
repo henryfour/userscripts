@@ -15,6 +15,7 @@
 // @grant        GM_addStyle
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 //
+// @match        https://*.8btc.com/article/*
 // @match        https://*.chainnews.com/*
 // @match        https://*.learnblockchain.cn/*
 // @match        https://*.zhihu.com/*
@@ -30,6 +31,19 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "8btc.com",
+    printHides: [
+      ".bbt-topbar", ".bbt-header", ".bbt-rightbar", 
+      ".main__sidebar", ".share-module", ".related-module", "#comment-module",
+      ".bbt-footer", 
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [
+      ".bbt-container > .bbt-row > .bbt-col-xs-16 {width: 100%}",
+    ],
+  },
   {
     domain: "chainnews.com",
     printHides: [
