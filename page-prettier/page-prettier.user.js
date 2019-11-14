@@ -66,6 +66,17 @@ var confs = [
     printCss: [],
   },
   {
+    domain: "learnblockchain.cn",
+    printHides: [
+      "#comments", "#sub-menu", "#header", ".post-copyright", ".post-footer", 
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [
+      ".content-wrap {padding: 0}"
+    ],
+  },
+  {
     domain: "zhihu.com",
     printHides: [
       // 专栏
