@@ -23,7 +23,7 @@
 // @match        https://*.opensea.io/*
 // @match        https://*.github.com/*
 // @match        https://*.juejin.im/post/*
-// @match        https://*.ethfans.org/posts/*
+// @match        https://*.ethfans.org/*
 // @match        https://*.jianshu.com/p/*
 // @match        https://*.zendesk.com/*
 // @match        https://*.okex.com/*
@@ -82,7 +82,7 @@ var confs = [
       // 专栏
       ".ColumnPageHeader-Wrapper", ".RichContent-actions", ".CornerButtons", ".Recommendations-Main", ".Comments-container", ".Post-Sub", 
       // 问答, question
-      "header", ".Question-sideColumn"
+      ".Question-sideColumn"
     ],
     hides: [],
     normalCss: [],
