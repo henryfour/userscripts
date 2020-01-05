@@ -15,7 +15,8 @@
 // @grant        GM_addStyle
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 //
-// @match        https://*vitalik.ca/*
+// @match        https://*.csdn.net/*
+// @match        https://*.vitalik.ca/*
 // @match        https://*.8btc.com/article/*
 // @match        https://*.chainnews.com/*
 // @match        https://*.learnblockchain.cn/*
@@ -32,6 +33,17 @@
 // ==/UserScript==
 
 var confs = [
+  {
+    domain: "csdn.net",
+    printHides: [
+      "#csdn-toolbar",
+      ".tool-box", ".csdn-side-toolbar", ".recommend-box", ".comment-box", ".template-box", ".blog_container_aside",
+      ".more-toolbox", ".person-messagebox"
+    ],
+    hides: [],
+    normalCss: [],
+    printCss: [],
+  },
   {
     domain: "vitalik.ca",
     printHides: [
