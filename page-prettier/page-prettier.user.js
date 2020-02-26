@@ -80,7 +80,9 @@ var confs = [
   {
     domain: "learnblockchain.cn",
     printHides: [
-      "#comments", "#sub-menu", "#header", ".post-copyright", ".post-footer", 
+      ".global-nav",".top-alert",
+      "#comments", ".widget-comments", ".widget-answers", "#sub-menu", "#header", ".post-copyright", ".post-footer", ".row .side",
+      "#support-button", "#collect-button",
     ],
     hides: [],
     normalCss: [],
