@@ -1,1 +1,9 @@
-userscripts============================================userscripts for tampermonkey### references* [tampermonkey]( http://tampermonkey.net/ )* [tampermonkey docs]( http://tampermonkey.net/documentation.php?ext=dhdg )* [openuserjs]( https://openuserjs.org/ )* [userscripts-mirror]( http://userscripts-mirror.org/ )
+# Userscripts
+
+Userscripts for [tampermonkey](http://tampermonkey.net)
+
+All scripts deployed can be found in [openuserjs.org](https://openuserjs.org/users/henryfour/scripts)
+
+### Links
+* [tampermonkey docs](http://tampermonkey.net/documentation.php)
+* [userscripts-mirror](http://userscripts-mirror.org)
