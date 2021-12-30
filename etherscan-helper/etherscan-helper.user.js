@@ -15,6 +15,13 @@
 // @grant        GM_setValue
 // @match        https://cn.etherscan.com/*
 // @match        https://*.etherscan.io/*
+// @match        https://*.bscscan.com/*
+// @match        https://*.hecoinfo.com/*
+// @match        https://*.ftmscan.com/*
+// @match        https://*.polygonscan.com/*
+// @match        https://*.arbiscan.io/*
+// @match        https://*.snowtrace.io/*
+//
 // @icon         https://etherscan.io/images/favicon2.ico
 // @require      https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js
 // ==/UserScript==
@@ -33,7 +40,11 @@ GM_addStyle(
 
   const HostCN = "cn.etherscan.com";
   const HostEN = "etherscan.io";
-  const KeyAutoJump = "etherscan.auto-jump";
+
+  const KeyAutoI18n = "etherscan.auto-jump";
+  function getAutoI18n() {
+    return GM_getValue(KeyAutoI18n, "");
+  }
 
   function isHostEN() {
     return window.location.hostname == HostEN;
@@ -44,8 +55,8 @@ GM_addStyle(
 
   function jumpToHost(toHost) {
     if (toHost && window.location.hostname != toHost) {
-      if (getAutoJumpHost()) {
-        setAutoJump(toHost);
+      if (getAutoI18n()) {
+        setAutoI18n(toHost);
       }
       let jumpUrl = window.location.href.replace(window.location.hostname, toHost);
       window.location.href = jumpUrl;
@@ -54,16 +65,13 @@ GM_addStyle(
     return false;
   }
 
-  function getAutoJumpHost() {
-    return GM_getValue(KeyAutoJump, "");
+
+  function setAutoI18n(toHost) {
+    GM_setValue(KeyAutoI18n, toHost);
   }
 
-  function setAutoJump(toHost) {
-    GM_setValue(KeyAutoJump, toHost);
-  }
-
-  function tryAutoJump() {
-    let toHost = getAutoJumpHost();
+  function tryAutoI18n() {
+    let toHost = getAutoI18n();
     switch (toHost) {
       case HostEN:
         return isHostCN() && jumpToHost(toHost);
@@ -75,19 +83,11 @@ GM_addStyle(
   }
 
   // auto jump before document loaded
-  if (tryAutoJump()) {
+  if (tryAutoI18n()) {
     return;
   }
 
-  window.addEventListener('load', () => {
-    // Hide username for screenshots sharing
-    let profile = document.getElementById("dropdownUser");
-    if (profile) {
-      profile.childNodes[1].textContent = "My Profile";
-    }
-
-    // floating functions
-    const floatingArea = addFloatingArea();
+  function toI18n(parent) {
     let btnText, toHost, checkText;
     if (isHostEN()) {
       btnText = '转到中文站';
@@ -101,8 +101,33 @@ GM_addStyle(
       // no jump for testnets
       return;
     }
-    addButton(floatingArea, btnText, () => { jumpToHost(toHost) }, 'btn-grad');
-    addCheckbox(floatingArea, checkText, (checked) => { setAutoJump(checked ? toHost : ""); });
+    addButton(parent, btnText, () => { jumpToHost(toHost) }, 'btn-grad');
+    addCheckbox(parent, checkText, (checked) => { setAutoI18n(checked ? toHost : ""); });
+  }
+
+  // Add button to view code in deth.net
+  function toCodeViewer(parent) {
+    // https://github.com/dethcrypto/ethereum-code-viewer/blob/main/docs/supported-explorers.md
+    let url = location.href;
+    if (url.indexOf(".io/") > 0) {
+        url = url.replace(".io/", ".deth.net/");
+    } else if (url.indexOf(".com") > 0) {
+        url = url.replace(".com/", ".deth.net/");
+    }
+    addButton(parent, 'deth.net', () => window.open(url), 'btn-grad');
+  }
+
+  window.addEventListener('load', () => {
+    // Hide username for screenshots sharing
+    let profile = document.getElementById("dropdownUser");
+    if (profile) {
+      profile.childNodes[1].textContent = "My Profile";
+    }
+
+    // floating functions
+    const floatingArea = addFloatingArea();
+    toCodeViewer(floatingArea);
+    toI18n(floatingArea);
   })
 
   function addButton(parent, text, onclick, cls, styles) {
@@ -122,7 +147,7 @@ GM_addStyle(
     let input = document.createElement('input');
     input.type = 'checkbox';
     input.id = 'auto-jump-check';
-    input.checked = getAutoJumpHost() ? true : false;
+    input.checked = getAutoI18n() ? true : false;
     input.value = true;
     input.onclick = () => { cb(input.checked); };
     let label = document.createElement('label');
