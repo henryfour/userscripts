@@ -1,10 +1,14 @@
 // ==UserScript==
 // @name         Github
 // @namespace    userscripts.henryfour.com
-// @version      0.0.1
 // @description  Gadget for github.com
+// @version      0.0.1
 // @author       HenryFour
+// @icon         https://github.githubassets.com/favicons/favicon.svg
+// @license	     MIT
+//
 // @match        https://github.com/*/*
+// @run-at       document-end
 // @grant        none
 // ==/UserScript==
 
